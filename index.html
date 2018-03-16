@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Psychic Game</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+	
+	<h1>The Psychic Game</h1>
+
+	<h3>Guess what letter I am thinking of...</h3>
+
+	<div id="game" class="main-container">
+		
+		<p>Wins: 0</p>
+    	<p>Losses: 0</p>
+    	<p>Guesses left: 9</p>
+    	<p>Your guesses so far: </p>
+	
+	</div>
+
+	 <footer>
+   
+  </footer>
+	
+
+	<script type="text/javascript">
+		
+		var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+
+		//All of the variables for tracking wins, losses, & guesses left
+		var wins = 0;
+		var losses = 0;
+		var guessesLeft = 9;
+		var lettersGuessed = [];
+		var computerGuess = [];
+
+
+		//Randomized computer guess at beginning
+		window.onload = function() {
+			var compGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+			computerGuess.push(compGuess);
+			console.log(computerGuess[0]);
+		}
+
+
+		//Code for game that begins once a user presses a letter
+		document.onkeyup = function(event) {
+			var playerGuess = event.key;
+			lettersGuessed.push(playerGuess);
+			console.log(computerGuess[0]);
+
+		if ((playerGuess === computerGuess[0]) && (guessesLeft > 0)) {
+			wins++;
+			guessesLeft = 9;
+			lettersGuessed.length = 0;
+			computerGuess.length = 0;
+			var compGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+			computerGuess.push(compGuess);
+			console.log(computerGuess[0]);
+		}
+
+		else if ((playerGuess !== computerGuess[0]) && (guessesLeft > 0)) {
+			guessesLeft = guessesLeft-1;
+		}
+
+		else {
+			losses++;
+			guessesLeft = 9;
+			lettersGuessed.length = 0;
+			computerGuess.length = 0;
+			var compGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+			computerGuess.push(compGuess);
+			console.log(computerGuess[0]);
+		}
+
+		 var html ="<p>Wins: " + wins + "</p>" +
+		          "<p>Losses: " + losses + "</p>" +
+		          "<p>Guesses left: " + guessesLeft + "</p>" +
+		          "<p>Your guesses so far: " + lettersGuessed + "</p>";
+		 
+		document.querySelector("#game").innerHTML = html;
+
+		}
+				// Notes:
+
+				// // an array of all the letters
+				// // telling JS to find a random letter
+				// // I do not need all 26 letters necessarily
+				// // Each index has a number, starting with 0
+
+				// var computerChoices = ["a", "s", "d", "f", "j", "k", "l", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "z", "x", "c", "b", "n", "m"]; 
+
+				// var wins = 0
+				// var losses = 0
+
+				// document.onkeyup = function(event) {
+
+				// var userGuess = event.key;
+
+
+
+				// console.log(Math.floor(Math.random() * letters.length)) 
+
+				// // "letters" can be the array name
+
+	</script>
+	
+</body>
+</html>
